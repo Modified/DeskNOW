@@ -1,9 +1,5 @@
 ### server.coffee
-MatchWiz
-- 2015-09-16: revamped; upgraded Constitution.
-- 2014-03-17: renamed directories (scaffolding).
-- 2014-02-25: dropped Zappa, use Express.IO.
-- 2014-02-05: created.
+DeskNow
 ###
 
 # Dependencies.
