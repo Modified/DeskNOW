@@ -48,7 +48,7 @@ grin=(next)->console.log ':-)'.green.inverse; next?()
 clean=(next)->shell 'rm --recursive --force build/* build/.[!.]* build/..?*',next
 
 ## Distribution preparation.
-dist=(next)->shell "cp -r --parents config.coffee server.coffee package.json client/images build",next
+dist=(next)->shell "cp -r --parents config.coffee server.coffee package.json client/images client/lib build",next
 #??? && ln --symbolic --verbose ../client/images ../client/lib build",next
 
 ## Build client side assets — CoffeeScript, Stylus, Teacup — and prepare distribution.

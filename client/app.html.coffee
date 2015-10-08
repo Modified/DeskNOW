@@ -30,7 +30,8 @@ module.exports=renderable ->
 			#??? ignore ->initially_hidden '#fb-root' #??? If using FB's SDK to connect client side?
 			#??? p '.browsehappy'
 
-			section div '#gmap'
+			section ->
+				div '#gmap'
 
 			# Debugging stuff???
 			if process.env.NODE_ENV is 'development'
