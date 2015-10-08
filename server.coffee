@@ -1,9 +1,9 @@
 ### server.coffee
-DeskNow
+DeskNOW: a Battlehack 2015 Tel Aviv project.
 ###
 
 # Dependencies.
-require 'coffee-script/register'
+require 'coffee-script/register' # So can require CoffeeScript directly.
 express=require 'express.oi'
 
 # Initialize, configure.
@@ -13,9 +13,8 @@ app=express()
 app.http().io() # Start HTTP and WebSockets servers.
 
 # LDB.
-mget=require 'level-mget'
+#??? mget=require 'level-mget'
 sub=require 'level-sublevel'
-lock=require 'level-lock'
 db=(require 'level-promise') sub (require 'level') 'data',keyEncoding:'utf8',valueEncoding:'json' #??? Ugly?
 events=db.sublevel 'events'
 
@@ -26,7 +25,7 @@ ASSETS=__dirname #???
 app
 .use (require 'compression')()
 # Serve static assets.
-.use '/a/',express.static ASSETS+'/assets' # Serve static assets development only???!!! Deal with cache invalidations for local development, and generally!
+.use '/a/',express.static ASSETS+'/assets' # Serve static assets development only??? Deal with cache invalidations for local development, and generally!
 .use '/i/',express.static ASSETS+'/images',maxage:3e10
 .use '/lib/',express.static ASSETS+'/lib' #??? On error, respond 404 and log it! Or does E default?
 #???.use '/styl/',express.static ASSETS+'/styl'
@@ -49,13 +48,11 @@ uuid=(a)->if a then (a^Math.random()*16>>a/4).toString 16 else ([1e7]+-1e3+-4e3+
 
 # Routes.
 app
-# Root.
-.all '/',(req,res)->res.redirect '/en/' #??? Should detect language prefs.
-# Directories: redirect to append slash.
-#??? http://localhost:3009/en/12/34/ — Error: ENOENT, stat '/home/head/Desktop/Work/MatchWiz/Code/build/mw.34.html'
-.all /\/(..)\/(event|help)$/,(req,res)->res.redirect req.path+'/'
+# Root???
 ## Public SPA template.
-.all /\/(..)\/(|event\/(.*)|help\/(.*)|login|logout|terms)$/,(req,res)->res.sendFile ASSETS+"/mw.#{req.params[0]}.html" #??? sendfile? but what about caching headers?! Ah, redirect instead to assets!!!
+.all '/',(req,res)->res.sendFile ASSETS+"/front.html" #??? what about caching headers?! Redirect instead to assets MW?
+# Directories: redirect to append slash.
+#??? .all /\/(..)\/(event|help)$/,(req,res)->res.redirect req.path+'/'
 
 # Messages.
 ###???
