@@ -14,7 +14,7 @@
 	"dependencies":{
     "teacup": "1.2.x",
     "coffee-script": "",
-    "express": "~4.12.3",
+    "express": "",
     "stylus": "~0.51.1",
     "page": "~1.6.2",
     "autoprefixer-stylus": "~0.6.0",
