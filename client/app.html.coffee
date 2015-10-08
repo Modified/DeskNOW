@@ -30,7 +30,7 @@ module.exports=renderable ->
 			#??? ignore ->initially_hidden '#fb-root' #??? If using FB's SDK to connect client side?
 			#??? p '.browsehappy'
 
-			div '#gmap'
+			section div '#gmap'
 
 			# Debugging stuff???
 			if process.env.NODE_ENV is 'development'
@@ -49,5 +49,5 @@ module.exports=renderable ->
 			#??? script src:'/socket.io/socket.io.js'
 
 			script src:'https://maps.googleapis.com/maps/api/js?key=AIzaSyCniD-PGFKTto5iWKZaJ8K25ShjxRM54Ng&signed_in=true&callback=initMap'
-			
+
 			script src:'/a/app.js' #??? Minify, etc.

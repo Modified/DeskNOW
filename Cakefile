@@ -66,15 +66,7 @@ build_styl=(next)->shell "stylus --use autoprefixer-stylus --compress --out ./bu
 #??? Repeat per translated language. Except office.
 #??? Drop the "cd", strip path or use `basename` instead or sth.
 build_teacup=(next)->
-	# ("./" for require to include CWD. Either '$f' or \'$f\' works. Similarly for \{\}.)
-	#??? shell '''for f in client/*.html.coffee;
-	#??? do
-	shell '''coffee -e "console.log (require './client/app.html.coffee')()" > build/client/app.html''',next
-	#??? done''',next
-	#??? Repeat per language, except sys.
-	#??? This is getting too long. Fugly. Promises, at least!
-	#!!! Compilation errors not caught now!
-	#??? Replace params with just lang, omit dir and use switch in code for it, features unused anyway.
+	shell '''coffee -e "console.log (require './client/app.html.coffee')()" > build/client/app.html''',next #??? Compilation errors don't get caught by this!
 
 #??? Bump build number (for versioning).
 bump=(next)->next?() #??? bump=(next)->shell 'B=$((`cat BUILD`+1)); echo -n $B > BUILD; cat BUILD',next #???!!! Edit package.json instead!
@@ -88,4 +80,4 @@ serve=(next)->
 # Deploy.
 #??? Tag repo automatically with timestamp every time deployed, because no history on WF!!!
 #??? deploy=(next)->shell "rsync --copy-links --recursive --compress --verbose --checksum build/ #{config.rsync_dest}",next
-restart=(next)->shell 'ssh decode@decodecode.net "cd ~/webapps/desknow; stop; start; sleep 5; tail ~/logs/user/desknow.log"',next
+restart=(next)->shell 'ssh decode@desknow.decodecode.net "cd ~/webapps/desknow; stop; start; sleep 5; tail ~/logs/user/desknow.log"',next
