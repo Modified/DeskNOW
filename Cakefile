@@ -48,7 +48,8 @@ grin=(next)->console.log ':-)'.green.inverse; next?()
 clean=(next)->shell 'rm --recursive --force build/* build/.[!.]* build/..?*',next
 
 ## Distribution preparation.
-dist=(next)->shell "cp config.coffee server.coffee package.json build && ln --symbolic --verbose ../client/images ../client/lib build",next
+dist=(next)->shell "cp -r --parents config.coffee server.coffee package.json client/images build",next
+#??? && ln --symbolic --verbose ../client/images ../client/lib build",next
 
 ## Build client side assets — CoffeeScript, Stylus, Teacup — and prepare distribution.
 build=(next)->
@@ -66,10 +67,10 @@ build_styl=(next)->shell "stylus --use autoprefixer-stylus --compress --out ./bu
 #??? Drop the "cd", strip path or use `basename` instead or sth.
 build_teacup=(next)->
 	# ("./" for require to include CWD. Either '$f' or \'$f\' works. Similarly for \{\}.)
-	shell '''for f in client/*.html.coffee;
-	do
-	coffee -e "console.log (require './$f')()" > build/${f%.html.coffee}.html;
-	done''',next
+	#??? shell '''for f in client/*.html.coffee;
+	#??? do
+	shell '''coffee -e "console.log (require './client/app.html.coffee')()" > build/client/app.html''',next
+	#??? done''',next
 	#??? Repeat per language, except sys.
 	#??? This is getting too long. Fugly. Promises, at least!
 	#!!! Compilation errors not caught now!
