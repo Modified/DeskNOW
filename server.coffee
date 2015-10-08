@@ -20,7 +20,7 @@ db=(require 'level-promise') sub (require 'level') 'data',keyEncoding:'utf8',val
 events=db.sublevel 'events'
 
 # Configuration for all environments???
-ASSETS=__dirname #???
+ASSETS=__dirname+'/client' #???
 
 # Middleware.
 app
@@ -51,7 +51,7 @@ uuid=(a)->if a then (a^Math.random()*16>>a/4).toString 16 else ([1e7]+-1e3+-4e3+
 app
 # Root???
 ## Public SPA template.
-.all '/',(req,res)->res.sendFile ASSETS+"/front.html" #??? what about caching headers?! Redirect instead to assets MW?
+.all '/',(req,res)->res.sendFile ASSETS+"/app.html" #??? what about caching headers?! Redirect instead to assets MW?
 # Directories: redirect to append slash.
 #??? .all /\/(..)\/(event|help)$/,(req,res)->res.redirect req.path+'/'
 

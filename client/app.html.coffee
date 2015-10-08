@@ -1,4 +1,4 @@
-### front.html.coffee
+### app.html.coffee
 Teacup template for DeskNOW.
 ###
 {renderable,normalizeArgs,comment,doctype,html,head,title,link,meta,script,body,section,main,aside,div,span,p,q,nav,header,footer,h1,h2,h3,h4,a,img,form,input,textarea,label,button,select,option,fieldset,ol,ul,li,table,tr,th,td,em,strong,b,i,blockquote,text,raw,tag,iframe,hr,br,coffeescript}=require 'teacup' #???
@@ -9,13 +9,13 @@ config=require '../config'
 
 module.exports=renderable ->
 	doctype 5
-	html #??? lang:lang,dir:(if lang in ['he','ar'] then 'rtl' else 'ltr'),-> #??? ICU?
+	html ->#??? lang:lang,dir:(if lang in ['he','ar'] then 'rtl' else 'ltr'),-> #??? ICU?
 		head ->
 			title '''DeskNOW'''
 			meta 'http-equiv':'content-type',content:'text/html;charset=utf-8'
 			#??? script src:'//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js' #??? Fallback...
 			#???... libs' stylesheets, webfonts…?
-			link href:'/a/front.css',rel:'stylesheet'
+			link href:'/a/app.css',rel:'stylesheet'
 			meta name:'viewport',content:'width=device-width,initial-scale=1'
 			#???... SEO: description, keywords, title, h1.
 			#???... FB preview: OG tags.
@@ -44,5 +44,5 @@ module.exports=renderable ->
 			script '''window.page || document.write('<script src="/lib/page.js"><\\/script>')''' # Fallback to local.
 			script src:'/lib/pointy/pointy.min.js' #??? CDN?
 			script src:'/lib/pointy/pointy.gestures.min.js'
-			script src:'/socket.io/socket.io.js'
-			script src:'/a/front.js' #??? Minify, etc.
+			#??? script src:'/socket.io/socket.io.js'
+			script src:'/a/app.js' #??? Minify, etc.

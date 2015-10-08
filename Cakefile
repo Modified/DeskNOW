@@ -56,19 +56,19 @@ build=(next)->
 	clean ->bump ->build_coffee_client ->build_styl ->build_teacup ->dist next
 
 # Compile CoffeeScript into JavaScript.
-build_coffee_client=(next)->shell "coffee --compile --output ./build/assets client/mw.coffee",next
+build_coffee_client=(next)->shell "coffee --compile --output ./build/client client/app.coffee",next
 
 # Preprocess Stylus into CSS.
-build_styl=(next)->shell "stylus --use autoprefixer-stylus --compress --out ./build/assets client/mw.styl",next
+build_styl=(next)->shell "stylus --use autoprefixer-stylus --compress --out ./build/client client/app.styl",next
 
 # Generate HTML from Teacup templates.
 #??? Repeat per translated language. Except office.
 #??? Drop the "cd", strip path or use `basename` instead or sth.
 build_teacup=(next)->
 	# ("./" for require to include CWD. Either '$f' or \'$f\' works. Similarly for \{\}.)
-	shell '''for fp in client/*.html.coffee;
-	do f=${fp#client/};
-	coffee -e "console.log (require './$fp')()" > build/${f%.html.coffee}.html;
+	shell '''for f in client/*.html.coffee;
+	do
+	coffee -e "console.log (require './$f')()" > build/${f%.html.coffee}.html;
 	done''',next
 	#??? Repeat per language, except sys.
 	#??? This is getting too long. Fugly. Promises, at least!
