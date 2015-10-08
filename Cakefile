@@ -79,5 +79,5 @@ serve=(next)->
 
 # Deploy.
 #??? Tag repo automatically with timestamp every time deployed, because no history on WF!!!
-#??? deploy=(next)->shell "rsync --copy-links --recursive --compress --verbose --checksum build/ #{config.rsync_dest}",next
+deploy=(next)->shell "rsync --copy-links --recursive --compress --verbose --checksum build/ #{config.rsync_dest}",next
 restart=(next)->shell 'ssh decode@desknow.decodecode.net "cd ~/webapps/desknow; stop; start; sleep 5; tail ~/logs/user/desknow.log"',next

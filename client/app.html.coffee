@@ -19,11 +19,9 @@ module.exports=renderable ->
 			meta name:'viewport',content:'width=device-width,initial-scale=1'
 			#???... SEO: description, keywords, title, h1.
 			#???... FB preview: OG tags.
-			###???
-			link href:'/a/favicon.ico',rel:'shortcut icon' #??? ,type:'image/x-icon'
-			link href:'/a/apple-touch-icon-precomposed.png',rel:'apple-touch-icon'
-			###
-			link href:'//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css',rel:'stylesheet' #??? And fallback how?!
+			#??? link href:'/a/favicon.ico',rel:'shortcut icon' #??? ,type:'image/x-icon'
+			#??? link href:'/a/apple-touch-icon-precomposed.png',rel:'apple-touch-icon'
+			link href:'//fonts.googleapis.com/css?family=Material+Icons',rel:'stylesheet'
 			#??? link href:'//fonts.googleapis.com/css?family=Ubuntu',rel:'stylesheet' #???
 
 		body '.desknow',-> #??? On html instead like/with Modernizr?
@@ -43,8 +41,8 @@ module.exports=renderable ->
 			#??? Non-lazy loading…
 			script src:'//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js' #??? LAB.js? Require? #??? Get version from config!
 			script '''window.jQuery || document.write('<script src="/lib/jquery-2.1.3.min.js"><\\/script>')''' # Fallback to local.
-			script src:'//cdn.rawgit.com/visionmedia/page.js/master/page.js' #??? Uglify!
-			script '''window.page || document.write('<script src="/lib/page.js"><\\/script>')''' # Fallback to local.
+			#??? script src:'//cdn.rawgit.com/visionmedia/page.js/master/page.js' #??? Uglify!
+			#??? script '''window.page || document.write('<script src="/lib/page.js"><\\/script>')''' # Fallback to local.
 			script src:'/lib/pointy/pointy.min.js' #??? CDN?
 			script src:'/lib/pointy/pointy.gestures.min.js'
 			#??? script src:'/socket.io/socket.io.js'
