@@ -46,5 +46,5 @@ module.exports=renderable ->
 			script src:'/lib/pointy/pointy.min.js' #??? CDN?
 			script src:'/lib/pointy/pointy.gestures.min.js'
 			#??? script src:'/socket.io/socket.io.js'
-			script src:'https://maps.googleapis.com/maps/api/js?key=AIzaSyCniD-PGFKTto5iWKZaJ8K25ShjxRM54Ng&signed_in=true&callback=initMap'
 			script src:'/a/app.js' #??? Minify, etc.
+			script src:'https://maps.googleapis.com/maps/api/js?key=AIzaSyCniD-PGFKTto5iWKZaJ8K25ShjxRM54Ng&signed_in=true&callback=initMap'
