@@ -4,7 +4,7 @@ var initialLocation;
 
 spaces = [
   	['Shared room at TLV port', 32.101212, 34.775483,
-		65, 'cont/DSC_1016.JPG'
+		65, 'cont/shared desk.jpg'
 	],
   	['Conference room with park views', 32.095168, 34.779726,
 		80, 'cont/conf-room.jpg'
