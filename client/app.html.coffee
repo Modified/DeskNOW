@@ -37,14 +37,21 @@ module.exports=renderable ->
 				div '#gmap'
 				form '#drawer.handle',->
 					div '#drawer-handle.material-icons','close'
-					label 'Type'
-					button '.material-icons',type:'button','local parking'
-					button '.material-icons',type:'button','local cafe'
-					button '.material-icons',type:'button','directions bike'
-					button '.material-icons',type:'button','wifi'
-					button '.material-icons',type:'button','nature people'
+					label 'Duration'
+					fieldset ->
+						span 'Hours'
+						input type:'range'
+						text 'You need to arrive within one hour of booking.'
+					label 'Amenities'
+					fieldset ->
+						button '.material-icons',type:'button','local_parking'
+						button '.material-icons',type:'button','local_cafe'
+						button '.material-icons',type:'button','directions_bike'
+						button '.material-icons',type:'button','wifi'
+						button '.material-icons',type:'button','nature_people'
 					label 'Price range'
-					input type:'slider'
+					fieldset ->
+						input type:'range'
 
 			# Debugging stuff???
 			if process.env.NODE_ENV is 'development'

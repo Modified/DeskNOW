@@ -66,6 +66,8 @@ window.setMarkers=(map)->
 		i++
 
 $ ->
-	new Dragdealer 'drawer',
+	dd=new Dragdealer 'map',
 		horizontal:no
 		vertical:yes
+		css3:no
+	#dd.setValue 0,200
