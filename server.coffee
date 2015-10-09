@@ -36,14 +36,6 @@ app
 #???app.use express.json()
 #???app.use express.urlencoded()
 
-###???
-app.io
-#??? .set 'log level',2 # Shut up!
-.enable 'browser client minification' # Send minified asset.
-.enable 'browser client etag' # Apply etag caching logic based on version number.
-.enable 'browser client gzip' # gzip the asset.
-###
-
 # Standard UUID format.
 uuid=(a)->if a then (a^Math.random()*16>>a/4).toString 16 else ([1e7]+-1e3+-4e3+-8e3+-1e11).replace /[108]/g,uuid
 
@@ -54,22 +46,6 @@ app
 .all '/',(req,res)->res.sendFile ASSETS+"/app.html" #??? what about caching headers?! Redirect instead to assets MW?
 # Directories: redirect to append slash.
 #??? .all /\/(..)\/(event|help)$/,(req,res)->res.redirect req.path+'/'
-
-# Messages.
-###???
-app.io.route 'list_events',(req)->
-	req.io.respond [
-		{id:'123',title:'Hackathon'}
-		{id:'987',title:'An eventful event!'}
-		{id:'567',title:'Yet another'}
-		]
-app.io.route 'create_event',(req)->
-	#???... Save event.
-	console.log 'create_event',req.data
-	db.put req.data,{},(err)->
-		if err then throw err #???
-		req.io.respond ! err
-###
 
 # Start server.
 app.listen config.http_port,->

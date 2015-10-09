@@ -1,11 +1,41 @@
 /// app.styl
 
+$deskblue=#118df0
+
+header
+	#map &
+		position absolute
+		top 0
+		width 100vw
+		padding 0.5rem
+		z-index 2
+		background-color $deskblue
 html
 body
 section
 	height 100%
 	margin 0
 	padding 0
+section
+	position relative
+	overflow hidden
 
+#drawer
+	position absolute
+	top 90%
+	background-color $deskblue
+#drawer-handle
+	position absolute
+	left 50%
+	margin-left -1rem
+	top -0.5em
+	padding 0.5em
+	font-size 2rem
+	border-radius 1rem
+	background-color $deskblue
 #gmap
 	height 100%
+#map
+	padding-top 3rem
+#splash
+	background url(/i/hero-background.jpg)

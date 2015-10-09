@@ -9,7 +9,7 @@ config=require '../config'
 
 module.exports=renderable ->
 	doctype 5
-	html ->#??? lang:lang,dir:(if lang in ['he','ar'] then 'rtl' else 'ltr'),-> #??? ICU?
+	html ->
 		head ->
 			title '''DeskNOW'''
 			meta 'http-equiv':'content-type',content:'text/html;charset=utf-8'
@@ -28,8 +28,23 @@ module.exports=renderable ->
 			#??? ignore ->initially_hidden '#fb-root' #??? If using FB's SDK to connect client side?
 			#??? p '.browsehappy'
 
-			section ->
+			section '#splash',style:'display:none',->
+				p 'Hunt for workspaces…'
+
+			section '#map.dragdealer',->
+				header ->
+					input placeholder:'Find elsewhere…'
 				div '#gmap'
+				form '#drawer.handle',->
+					div '#drawer-handle.material-icons','close'
+					label 'Type'
+					button '.material-icons',type:'button','local parking'
+					button '.material-icons',type:'button','local cafe'
+					button '.material-icons',type:'button','directions bike'
+					button '.material-icons',type:'button','wifi'
+					button '.material-icons',type:'button','nature people'
+					label 'Price range'
+					input type:'slider'
 
 			# Debugging stuff???
 			if process.env.NODE_ENV is 'development'
@@ -41,10 +56,9 @@ module.exports=renderable ->
 			#??? Non-lazy loading…
 			script src:'//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js' #??? LAB.js? Require? #??? Get version from config!
 			script '''window.jQuery || document.write('<script src="/lib/jquery-2.1.3.min.js"><\\/script>')''' # Fallback to local.
-			#??? script src:'//cdn.rawgit.com/visionmedia/page.js/master/page.js' #??? Uglify!
-			#??? script '''window.page || document.write('<script src="/lib/page.js"><\\/script>')''' # Fallback to local.
 			script src:'/lib/pointy/pointy.min.js' #??? CDN?
 			script src:'/lib/pointy/pointy.gestures.min.js'
 			#??? script src:'/socket.io/socket.io.js'
 			script src:'/a/app.js' #??? Minify, etc.
 			script src:'https://maps.googleapis.com/maps/api/js?key=AIzaSyCniD-PGFKTto5iWKZaJ8K25ShjxRM54Ng&signed_in=true&callback=initMap'
+			script src:'https://cdnjs.cloudflare.com/ajax/libs/dragdealer/0.9.8/dragdealer.min.js'
