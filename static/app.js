@@ -1,14 +1,16 @@
 var spaces, infowindow;
+var initialLocation;
+
 
 spaces = [
-  	['Park view', 32.095559, 34.785096,
+  	['Shared room at TLV port', 32.101212, 34.775483,
 		65, 'cont/DSC_1016.JPG'
 	],
-  	['TLV port', 32.098176, 34.775998,
-		80, 'images/loc_ico.png'
+  	['Conference room with park views', 32.095168, 34.779726,
+		80, 'cont/conf-room.jpg'
 	],
-  	['Close to train station', 32.085269, 34.793979,
-		75, 'images/loc_ico.png'
+  	['Private room with large desk, close to train station', 32.085269, 34.793979,
+		75, 'cont/desk-space.jpg'
 	]
   ];
  
@@ -19,7 +21,6 @@ window.initMap = function() {
   	setMarkers(map);
   	if (navigator.geolocation) {
   		navigator.geolocation.getCurrentPosition(function(position) {
-  			var initialLocation;
   			initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
   			return map.setCenter(initialLocation);
   		})
@@ -27,7 +28,7 @@ window.initMap = function() {
 
 	window.infowindow = new google.maps.InfoWindow({
 		content: '',
-		maxWidth: 200
+		maxWidth: 300
 	});
 
 };
@@ -63,15 +64,34 @@ window.initMap = function() {
 
   		marker.addListener('click', function() {
 			infowindow.setContent(
+				'<div id="infowindow_space">' +
 				'<h2 id="firstHeading" class="firstHeading">' + this.cont[0] + '</h2>' +
 				'<div id="bodyContent">' +
-					'<p><img src="' + this.cont[4] + '" width="100%" heigh="auto"></p>' +
-					'<p><b>$' + this.cont[3] + '</b></p>' +
-					'<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="business" value="BS9Y4C67JFVHU"><input type="hidden" name="lc" value="AU"><input type="hidden" name="item_name" value="DeskNOW"><input type="hidden" name="amount" value="50.00"><input type="hidden" name="currency_code" value="AUD"><input type="hidden" name="button_subtype" value="services"><input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"><input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online."><img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1"></form></p>' +
-				'</div>');
+					'<div><img src="' + this.cont[4] + '" width="85%" heigh="auto"></div>' +
+					'<div align=left>' + getDistanceKM(initialLocation.lat(), initialLocation.lng(), this.cont[1], this.cont[2]) + ' Km</div>' +
+					'<div align=right><b>$' + this.cont[3] + ' / PH</b></div>' +
+					'<div><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="business" value="BS9Y4C67JFVHU"><input type="hidden" name="lc" value="AU"><input type="hidden" name="item_name" value="DeskNOW"><input type="hidden" name="amount" value="50.00"><input type="hidden" name="currency_code" value="AUD"><input type="hidden" name="button_subtype" value="services"><input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"><input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online."><img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1"></form></div>' +
+				'</div></div>');
 			infowindow.open(map, this);
 			map.setCenter(this.getPosition());
   		});
   		
   	}
   };
+  
+
+	var rad = function(x) {
+		return x * Math.PI / 180;
+	};
+
+	var getDistanceKM = function(lat1, lng1, lat2, lng2) {
+		var R = 6378137; // Earth’s mean radius in meter
+		var dLat = rad(lat2 - lat1);
+		var dLong = rad(lng2 - lng1);
+		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+			Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
+			Math.sin(dLong / 2) * Math.sin(dLong / 2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		var d = R * c;
+		return Math.round(d/100)/10; // returns the distance in meter
+	};
