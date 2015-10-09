@@ -1,9 +1,15 @@
-  var spaces, infowindow;
+var spaces, infowindow;
 
-  spaces = [
-  	['Park view', 32.098176, 34.775998, 3],
-  	['TLV port', 32.095559, 34.785096, 2],
-  	['Close to train station', 32.085269, 34.793979, 1]
+spaces = [
+  	['Park view', 32.095559, 34.785096,
+		65, 'cont/DSC_1016.JPG'
+	],
+  	['TLV port', 32.098176, 34.775998,
+		80, 'images/loc_ico.png'
+	],
+  	['Close to train station', 32.085269, 34.793979,
+		75, 'images/loc_ico.png'
+	]
   ];
  
 window.initMap = function() {
@@ -20,7 +26,7 @@ window.initMap = function() {
 	}
 
 	window.infowindow = new google.maps.InfoWindow({
-		content: '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' + '<div id="bodyContent">' + '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large </p>' + '</div>',
+		content: '',
 		maxWidth: 200
 	});
 
@@ -35,12 +41,12 @@ window.initMap = function() {
   		origin: new google.maps.Point(0, 0),
   		anchor: new google.maps.Point(0, 32)
   	};
-  	shape = {
+  	__shape = {
   		coords: [1, 1, 1, 20, 18, 20, 18, 1],
   		type: 'poly'
   	};
-  	i = 0;
-  	while (i < spaces.length) {
+  	
+  	for (i = 0; i < spaces.length; i++) {
   		space = spaces[i];
   		marker = new google.maps.Marker({
   			position: {
@@ -51,14 +57,21 @@ window.initMap = function() {
   			icon: image,
   			shape: shape,
   			title: space[0],
-  			zIndex: space[3]
+  			cont: space,
+  			//zIndex: space[3]
   		});
 
   		marker.addListener('click', function() {
-  			infowindow.content = this.title;
+			infowindow.setContent(
+				'<h2 id="firstHeading" class="firstHeading">' + this.cont[0] + '</h2>' +
+				'<div id="bodyContent">' +
+					'<p><img src="' + this.cont[4] + '" width="100%" heigh="auto"></p>' +
+					'<p><b>$' + this.cont[3] + '</b></p>' +
+					'<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="business" value="BS9Y4C67JFVHU"><input type="hidden" name="lc" value="AU"><input type="hidden" name="item_name" value="DeskNOW"><input type="hidden" name="amount" value="50.00"><input type="hidden" name="currency_code" value="AUD"><input type="hidden" name="button_subtype" value="services"><input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"><input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online."><img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1"></form></p>' +
+				'</div>');
 			infowindow.open(map, this);
 			map.setCenter(this.getPosition());
   		});
-  		i++;
+  		
   	}
   };
