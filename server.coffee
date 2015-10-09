@@ -16,8 +16,8 @@ app=express()
 # LDB.
 #??? mget=require 'level-mget'
 sub=require 'level-sublevel'
-db=(require 'level-promise') sub (require 'level') 'data',keyEncoding:'utf8',valueEncoding:'json' #??? Ugly?
-events=db.sublevel 'events'
+#!!! db=(require 'level-promise') sub (require 'level') 'data',keyEncoding:'utf8',valueEncoding:'json' #??? Ugly?
+#events=db.sublevel 'events'
 
 # Configuration for all environments???
 ASSETS=__dirname+'/client' #???
